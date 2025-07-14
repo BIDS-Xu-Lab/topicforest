@@ -1,0 +1,47 @@
+{
+    "dataset_id": "XP-33K",
+    "type": "PRE_GENERATED",
+    "status": "COMPLETED",
+    "datetime_created": "2025-07-11",
+    "datetime_updated": "2025-07-11",
+    
+    "title": "Biomedical Scientific Reports",
+    "description": "Publications of Biomedical Scientific Reports",
+    "total_records": 24336,
+
+    "data_uris": {
+        "points_data_uri": "xp-33k.tsv",
+        "topic_data_uri": "xp-33k.topics.json"
+    },
+
+    "config": {
+        "color_scale": "by_attr_color",
+        "size_scale": "constant_value",
+        "size_scale_factor": 1.5,
+
+        "color_legend": [
+            {"color": "#17becf", "label": "Plant Conservation Sustainability"},
+            {"color": "#1f77b4", "label": "Immune Regulation Dynamics"},
+            {"color": "#2ca02c", "label": "Chronic Disease Interconnections"},
+            {"color": "#7f7f7f", "label": "Protein Dynamics"},
+            {"color": "#8c564b", "label": "Neuronal Health Dynamics"},
+            {"color": "#8dd3c7", "label": "Nanomaterials Innovations"},
+            {"color": "#9467bd", "label": "Metabolic Health Dynamics"},
+            {"color": "#98df8a", "label": "Immune Inflammation Dynamics"},
+            {"color": "#9edae5", "label": "Cellular Imaging Innovations"},
+            {"color": "#aec7e8", "label": "Cellular Mechanisms & Regulation"},
+            {"color": "#bcbd22", "label": "Microbiome Interactions"},
+            {"color": "#c49c94", "label": "Cognitive Dynamics"},
+            {"color": "#c5b0d5", "label": "Neurodegenerative Health"},
+            {"color": "#c7c7c7", "label": "Plant Stress Resilience"},
+            {"color": "#d62728", "label": "Cancer Biomarkers & Immunity"},
+            {"color": "#dbdb8d", "label": "Ecological Adaptation Evolution"},
+            {"color": "#e377c2", "label": "Cognitive-Emotional Interactions"},
+            {"color": "#f7b6d2", "label": "Neuro-Rehabilitation Strategies"},
+            {"color": "#ff7f0e", "label": "Viral Pathogen Research"},
+            {"color": "#ff9896", "label": "Cardiovascular Mechanisms"},
+            {"color": "#ffbb78", "label": "Imaging and Surgery Innovations"},
+            {"color": "#ffed6f", "label": "Imaging Techniques"}
+        ]
+    }
+}
