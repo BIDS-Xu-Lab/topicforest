@@ -5,6 +5,8 @@ TopicForest: Embedding-driven Hierarchical Clustering and Labeling for Biomedica
 
 The interactive visualization of TopicForest's hierarchical clustering is available at https://clinicalnlp.org/topicforest/. 
 
+![alt text](./docs/image.jpg)
+
 ## System Features
 - The system displays 22 clusters, each assigned a unique color and an automatically generated topic label.
 - Hover over a topic label to highlight all articles belonging to that cluster.
