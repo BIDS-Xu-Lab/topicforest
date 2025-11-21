@@ -73,6 +73,10 @@ Output:
 - `*.cluster_assignments.tsv`: Cluster assignments for each data point at each layer (i.e., level). See [example output](/bio_scirep/24k_abstracts.cluster_assignments.tsv).
 - `*.topics.json`: Topic labels and descriptions. The JSON file contains levels, where each level has a level key and a list of topic dictionaries. See [example JSON file](/bio_scirep/24k_abstracts.topics.json). You can find a topic label and description for a topic by its `global_topic_key`. For example, the first abstract (pid=0) is assigned to cluster 68 at the first layer (i.e., L0), so its corresponding label and description can be obtained by referencing `L0_68`.
 
+## Visualize and Interactively Explore TopicForest Outputs
+
+Please see the notebook [notebooks/interactive_plot.ipynb](./notebooks/interactive_plot.ipynb), which demonstrates TopicForest outputs using interactive plots within Jupyter Notebook.
+
 # 3 Biological Abstracts from Scientific Reports
 
 We collected 24,336 biological abstracts from *Scientific Reports* and exported them as a TSV file: [/bio_scirep/24k_abstracts.tsv](/bio_scirep/24k_abstracts.tsv), which has the following columns:
