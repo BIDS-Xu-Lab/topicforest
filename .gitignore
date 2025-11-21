@@ -106,10 +106,6 @@ dist
 # for mac
 .DS_Store
 
-# large data files
-*.tsv
-dataset/*.json
-
 # local envs
 .env
 .env.*
@@ -118,9 +114,11 @@ dataset/*.json
 tree.json
 model.tar.gz
 
-# dataset
-dataset/*
-*.meta.json
-*.tsv
-*.topics.json
-*.thumbnail.jpg
+# python virtual environment
+.venv/
+
+# python cache
+__pycache__/
+
+# testing files
+test.ipynb

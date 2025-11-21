@@ -1,0 +1,10 @@
+fastcluster==1.2.6
+numpy==1.26.4
+pandas
+scipy==1.15.2
+openai
+tqdm
+tenacity
+python-dotenv
+scikit-learn==1.6.1
+ipykernel
