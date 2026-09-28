@@ -69,12 +69,15 @@ def get_output_paths(path_tsv, output_dir=None):
 def main():
     args = parse_args()
     
-    # Get the OpenAI API key from the environment variable
-    openai_api_key = os.getenv("OPENAI_API_KEY", "")
-    if openai_api_key:
-        print("Using OpenAI API key from .env file")
+    # Get the API key and optional OpenAI-compatible base URL
+    api_key = os.getenv("API_KEY", "")
+    base_url = os.getenv("BASE_URL", "").strip()
+    if api_key:
+        print("Using API key from the environment")
+        if base_url:
+            print(f"Using OpenAI-compatible base URL: {base_url}")
     else:
-        print("No OpenAI API key found in .env file. Please set the OPENAI_API_KEY in the .env file.")
+        print("No API key found. Please set API_KEY in the environment or .env file.")
         exit(1)
     
     # Create cluster config
@@ -91,7 +94,8 @@ def main():
         point_identifier=args.point_identifier,
         dimensions=args.dimensions.split(','),
         topic_cluster_configs=cluster_config,
-        openAI_api_key=openai_api_key
+        api_key=api_key,
+        base_url=base_url,
     )
     
     # Get output paths

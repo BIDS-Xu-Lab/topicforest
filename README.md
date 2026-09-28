@@ -33,21 +33,25 @@ If you cannot open the website or the website loads slowly, you can view the web
 
 ## Environment Setup
 
-We implemented and tested TopicForest on Python 3.12.8. Set up the virtual environment:
+We implemented and tested TopicForest on Python 3.12. Please use `uv` and set up the virtual environment:
 
 ```bash
-bash setup_venv.sh
+uv venv --python 3.12
+source .venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 ## Command Line Interface (CLI)
 
-Set up your OpenAI API key in `.env`:
+Set your API key in `.env`. `BASE_URL` is optional: leave it unset to use the OpenAI API, or set it to an OpenAI-compatible endpoint (for example Azure AI Foundry). The URL should be the API root the client appends `/chat/completions` to, and it should end with a trailing slash.
 
 ```bash
 # create an empty .env file
 touch .env
 # set up your API key in the .env
-echo 'OPENAI_API_KEY="YOUR_API_KEY"' >> .env
+echo 'API_KEY="YOUR_API_KEY"' >> .env
+# optional: OpenAI-compatible base URL (Azure example)
+echo 'BASE_URL="https://YOUR-RESOURCE.services.ai.azure.com/api/projects/YOUR-PROJECT/openai/v1/"' >> .env
 ```
 
 ```bash
@@ -55,7 +59,7 @@ python run.py --path_tsv bio_scirep/24k_abstracts.tsv \
 --L 3 \
 --k_top_layer 22 \
 --k_lowest_layer 300 \
---model_name gpt-4o-mini \
+--model_name gpt-4.1-nano \
 --deduplicate_topic_labels
 ```
 

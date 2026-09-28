@@ -42,10 +42,11 @@ class HierarchicalTopicAnnotator:
         self.L = self.config.topic_cluster_configs.L
         self.model_name = model_name # the model name to use for the llm
 
-        if config.openAI_api_key != "":
-            self.client = OpenAI(
-                api_key=config.openAI_api_key,
-            )
+        if config.api_key != "":
+            client_kwargs = {"api_key": config.api_key}
+            if config.base_url:
+                client_kwargs["base_url"] = config.base_url
+            self.client = OpenAI(**client_kwargs)
 
         # caches for topic tree
         self.topic_tree = TopicTree()

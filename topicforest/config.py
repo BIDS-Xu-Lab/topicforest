@@ -26,7 +26,8 @@ class BaseTopicAnnotatorConfig:
     point_identifier: str = 'pid' # e.g. 'pmid', 'pid', 'doi'
     dimensions: List[str] = field(default_factory=list) # e.g. ['x', 'y', 'z'] or ['x', 'y']
     flag_output_include_pids: bool = True # e.g. True, False
-    openAI_api_key: str = ''
+    api_key: str = ''
+    base_url: str = '' # OpenAI-compatible API root; empty uses the OpenAI SDK default
 
 @dataclass
 class HierarchicalTopicAnnotatorConfig(BaseTopicAnnotatorConfig):
