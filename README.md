@@ -71,11 +71,45 @@ Parameters:
 - `--model_name`: OpenAI's model for LLM-based recursive topic labeling. We've tested *gpt-4o-mini* and *gpt-4.1-nano*.
 - `--deduplicate_topic_labels`: Deduplicate topic labels at each layer. This is an experimental feature; however, we find it useful to reduce duplicated topic labels.
 
+The example command uses the published demonstration settings (`L=3`, 22 top topics, 300 lowest-layer topics). To choose `--L`, `--k_top_layer`, and `--k_lowest_layer` for a dataset, see [Choose the number of layers and clusters](#choose-the-number-of-layers-and-clusters).
+
 Note: if you specify more than two layers (e.g., `--L 3`), we infer the number of topics for the intermediate layers by assuming the number of topics exponentially scales across layers.
 
 Output:
 - `*.cluster_assignments.tsv`: Cluster assignments for each data point at each layer (i.e., level). See [example output](/bio_scirep/24k_abstracts.cluster_assignments.tsv).
 - `*.topics.json`: Topic labels and descriptions. The JSON file contains levels, where each level has a level key and a list of topic dictionaries. See [example JSON file](/bio_scirep/24k_abstracts.topics.json). You can find a topic label and description for a topic by its `global_topic_key`. For example, the first abstract (pid=0) is assigned to cluster 68 at the first layer (i.e., L0), so its corresponding label and description can be obtained by referencing `L0_68`.
+
+## Choose the number of layers and clusters
+
+[`search_hierarchy.py`](./search_hierarchy.py) recommends `--L`, `--k_top_layer`, and `--k_lowest_layer` before you spend API calls on labeling. It fits one linkage on the same coordinate columns as `run.py` (default `x,y`) and writes a recommendation, a few alternatives, and a ready-to-run `run.py` command. It does not call a language model and does not need `API_KEY`.
+
+```bash
+python search_hierarchy.py --path_tsv bio_scirep/24k_abstracts.tsv
+```
+
+The report is also saved as `<input stem>.hierarchy_search.json` next to the input. Use `--output` to choose another path.
+
+The search ranks dendrogram cuts in the clustered coordinates, usually the 2D map:
+
+- **Top layer:** gap prominence and a subsampled silhouette score, inside a navigable range (often 8–40 clusters).
+- **Lowest layer:** the same geometry, with a preference for about `--target_docs_per_leaf` documents per cluster (default 80).
+- **Layers:** `L` is the depth whose branching factor is near `--target_branch` (default 4) and whose layer sizes stay strictly decreasing. Intermediate counts use the same exponential schedule as `run.py`. Level 0 is the most specific layer.
+
+Overrides:
+
+- `--target_docs_per_leaf`: broader or finer leaf topics
+- `--k_top_min`, `--k_top_max`: range of top-layer cluster counts
+- `--target_branch`, `--branch_min`, `--branch_max`, `--max_layers`: tree depth
+- `--linkage`, `--metric`, `--dimensions`: match the `run.py` call you plan to make. Ward linkage requires `--metric euclidean`.
+
+`python search_hierarchy.py --self_check` checks that `k_top_layer=22`, `k_lowest_layer=300`, and `L=3` still resolve to 22 → 81 → 300.
+
+### Agent skills
+
+Coding agents load these workflows from `.agents/skills/`. Cursor and Codex discover that directory. Claude Code discovers the matching symlink under [`.claude/skills/`](./.claude/skills). Edit the `.agents/skills/` copy; the Claude path follows it.
+
+- [Search the hierarchy](./.agents/skills/search-topicforest-hierarchy/SKILL.md) before labeling, to choose `--L`, `--k_top_layer`, and `--k_lowest_layer`.
+- [Run TopicForest](./.agents/skills/run-topicforest/SKILL.md) to cluster the corpus and label topics with the LLM.
 
 ## Visualize and Interactively Explore TopicForest Outputs
 
